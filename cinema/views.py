@@ -18,10 +18,10 @@ def movie_list(request):
         case "POST":
             serializer = MovieSerializer(data=request.data)
 
-            if serializer.is_valid(raise_exception=True):
-                serializer.save()
-                return Response(serializer.data,
-                                status=status.HTTP_201_CREATED)
+            serializer.is_valid(raise_exception=True)
+            serializer.save()
+            return Response(serializer.data,
+                            status=status.HTTP_201_CREATED)
 
 
 @api_view(["GET", "PUT", "DELETE"])
@@ -35,9 +35,9 @@ def movie_detail(request, movie_id):
         case "PUT":
             serializer = MovieSerializer(movie, data=request.data)
 
-            if serializer.is_valid(raise_exception=True):
-                serializer.save()
-                return Response(serializer.data, status=status.HTTP_200_OK)
+            serializer.is_valid(raise_exception=True)
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
         case "DELETE":
             movie.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
